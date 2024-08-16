@@ -28,25 +28,47 @@
 */
 #include <SFML/Graphics.hpp>
 
-int main()
-{
-  sf::RenderWindow window(sf::VideoMode(800, 600), "Mi primera ventana SFML");
-  sf::CircleShape shape(100.f);
-  shape.setFillColor(sf::Color::Green);
+// Variables globales como punteros
+sf::RenderWindow* window;
+sf::CircleShape* shape;
 
-  while (window.isOpen())
-  {
-    sf::Event event;
-    while (window.pollEvent(event))
-    {
-      if (event.type == sf::Event::Closed)
-        window.close();
-    }
+// Función de inicialización
+void initialize() {
+  window = new sf::RenderWindow(sf::VideoMode(800, 600), "Mi ventana SFML con punteros");
+  shape = new sf::CircleShape(100.f);
+  shape->setFillColor(sf::Color::Green);
+}
 
-    window.clear();
-    window.draw(shape);
-    window.display();
+// Función de manejo de eventos
+void handleEvents() {
+  sf::Event event;
+  while (window->pollEvent(event)) {
+    if (event.type == sf::Event::Closed)
+      window->close();
+  }
+}
+
+// Función de renderizado
+void render() {
+  window->clear();
+  window->draw(*shape);
+  window->display();
+}
+
+// Función de limpieza
+void cleanup() {
+  delete window;
+  delete shape;
+}
+
+int main() {
+  initialize();
+
+  while (window->isOpen()) {
+    handleEvents();
+    render();
   }
 
+  cleanup();
   return 0;
 }

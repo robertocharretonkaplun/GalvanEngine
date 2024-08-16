@@ -26,49 +26,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
 */
-#include <SFML/Graphics.hpp>
-
-// Variables globales como punteros
-sf::RenderWindow* window;
-sf::CircleShape* shape;
-
-// Función de inicialización
-void initialize() {
-  window = new sf::RenderWindow(sf::VideoMode(800, 600), "Mi ventana SFML con punteros");
-  shape = new sf::CircleShape(100.f);
-  shape->setFillColor(sf::Color::Green);
-}
-
-// Función de manejo de eventos
-void handleEvents() {
-  sf::Event event;
-  while (window->pollEvent(event)) {
-    if (event.type == sf::Event::Closed)
-      window->close();
-  }
-}
-
-// Función de renderizado
-void render() {
-  window->clear();
-  window->draw(*shape);
-  window->display();
-}
-
-// Función de limpieza
-void cleanup() {
-  delete window;
-  delete shape;
-}
+#include "Prerequisites.h"
+#include "Window.h"
 
 int main() {
-  initialize();
+  Window window(800, 600, "Mi ventana SFML");
 
-  while (window->isOpen()) {
-    handleEvents();
-    render();
+  sf::CircleShape shape(100.f);
+  shape.setFillColor(sf::Color::Green);
+
+  while (window.isOpen()) {
+    window.handleEvents();
+
+    window.clear();
+    window.draw(shape);
+    window.display();
   }
 
-  cleanup();
   return 0;
 }

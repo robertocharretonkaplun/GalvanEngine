@@ -32,14 +32,44 @@
 int main() {
   Window window(800, 600, "Mi ventana SFML");
 
-  sf::CircleShape shape(100.f);
+  sf::CircleShape shape(10.f);  // Radio de 50
+  sf::CircleShape shape2(10.f);  // Radio de 50
   shape.setFillColor(sf::Color::Green);
+  shape.setPosition(400.f, 300.f);  // Posición inicial en el centro
+  shape2.setPosition(400.f, 300.f);  // Posición inicial en el centro
+
+  sf::RectangleShape obstacle(sf::Vector2f(100.f, 200.f));  // Obstáculo rectangular
+  obstacle.setFillColor(sf::Color::Red);
+  obstacle.setPosition(600.f, 200.f);  // Posición del obstáculo
+
+  float speed = 200.f;  // Velocidad del movimiento
+
+  sf::Clock clock;
 
   while (window.isOpen()) {
     window.handleEvents();
 
+    sf::Time deltaTime = clock.restart();
+
+    // Obtener la posición actual del mouse
+    sf::Vector2i mousePosition = sf::Mouse::getPosition(*window.getWindow());
+    sf::Vector2f mousePosF(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
+
+    // Llamar a la función Seek para mover el círculo hacia el mouse
+    //Seek(shape, mousePosF, speed, deltaTime.asSeconds(), 50);
+
+    // Llamar a la función Flee para alejar el círculo del mouse
+    //Flee(shape, shape2.getPosition(), speed, deltaTime.asSeconds(), 25);
+
+    // Llamar a ObstacleAvoidance para mover el círculo hacia el mouse evitando el obstáculo
+    //ObstacleAvoidance(shape, mousePosF, obstacle, speed, deltaTime.asSeconds(), 1);
+
+
     window.clear();
     window.draw(shape);
+    window.draw(shape2);
+    window.draw(obstacle);
+
     window.display();
   }
 

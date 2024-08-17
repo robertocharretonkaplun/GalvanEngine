@@ -159,11 +159,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\BaseApp.cpp" />
     <ClCompile Include="src\GalvanEngine.cpp" />
     <ClCompile Include="src\SteeringBehaviors.cpp" />
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\BaseApp.h" />
     <ClInclude Include="include\Prerequisites.h" />
     <ClInclude Include="include\SteeringBehaviors.h" />
     <ClInclude Include="include\Window.h" />

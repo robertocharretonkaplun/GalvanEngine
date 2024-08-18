@@ -46,6 +46,27 @@ SteeringBehaviors::Flee(sf::CircleShape& shape,
 }
 
 void 
+SteeringBehaviors::Arrive(sf::CircleShape& shape, 
+													const sf::Vector2f& targetPosition, 
+													float maxSpeed, 
+													float slowRadius, 
+													float deltaTime) {
+	sf::Vector2f shapePosition = shape.getPosition();
+	sf::Vector2f direction = targetPosition - shapePosition;
+	float distance = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+
+	if (distance > 0) {
+		float desiredSpeed = maxSpeed;
+		if (distance < slowRadius) {
+			desiredSpeed = maxSpeed * (distance / slowRadius);
+		}
+
+		sf::Vector2f desiredVelocity = (direction / distance) * desiredSpeed;
+		shape.move(desiredVelocity * deltaTime);
+	}
+}
+
+void 
 SteeringBehaviors::ObstacleAvoidance(sf::CircleShape& shape, 
 																		 const sf::Vector2f& targetPosition, 
 																		 const sf::RectangleShape& obstacle, 

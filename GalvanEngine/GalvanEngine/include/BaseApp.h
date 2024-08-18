@@ -29,7 +29,7 @@
 #pragma once
 #include "Prerequisites.h"
 #include "Window.h"
-
+#include "SteeringBehaviors.h"
 class 
 BaseApp {
 public:
@@ -55,9 +55,15 @@ private:
 	Window* m_window;
 	sf::Clock clock;
 	sf::Time deltaTime;
+	SteeringBehaviors SB;
 
 
 	sf::CircleShape shape;  // Radio de 50
 	sf::CircleShape shape2;  // Radio de 50
 	sf::RectangleShape obstacle;  // Obstáculo rectangular
+
+	float speed = 200.f;  // Velocidad del movimiento
+	float slowRadius = 150.f; // Radio dentro del cual se desacelera
+	float waypointRadius = 10.f; // Margen de error para considerar que llegó al waypoint
+	int pointIndex = 0;
 };

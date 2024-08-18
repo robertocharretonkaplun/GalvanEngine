@@ -38,6 +38,23 @@ public:
 			 float speed,
 			 float deltaTime, 
 			 float range);
+	
+/**
+ * @brief Mueve un objeto `sf::CircleShape` hacia una posición objetivo utilizando el efecto "Arrive",
+ *        donde el objeto desacelera a medida que se acerca al objetivo.
+ *
+ * @param shape El `sf::CircleShape` que se va a mover.
+ * @param targetPosition La posición objetivo hacia la cual el círculo se moverá.
+ * @param maxSpeed La velocidad máxima a la que el círculo se moverá.
+ * @param slowRadius El radio dentro del cual el círculo comenzará a desacelerar.
+ * @param deltaTime El tiempo transcurrido desde el último fotograma, utilizado para ajustar la velocidad del movimiento.
+ */
+	void 
+	Arrive(sf::CircleShape& shape, 
+				 const sf::Vector2f& targetPosition, 
+				 float maxSpeed, 
+				 float slowRadius, 
+				 float deltaTime);
 
 /**
  * @brief Mueve un objeto `sf::CircleShape` hacia una posición objetivo mientras evita obstáculos.

@@ -159,7 +159,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\BaseApp.cpp" />
     <ClCompile Include="src\GalvanEngine.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\BaseApp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

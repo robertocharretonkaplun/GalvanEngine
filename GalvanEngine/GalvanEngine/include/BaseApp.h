@@ -27,7 +27,8 @@
  * SOFTWARE.
 */
 #pragma once
-#include <SFML/Graphics.hpp>
+#include "Prerequisites.h"
+#include "Window.h"
 
 class
 BaseApp {
@@ -43,10 +44,6 @@ public:
 	void
 	initialize();
 
-	// Funcion de manejo de datos
-	void
-	handleEvents();
-
 	// Funcion que se actualiza por frame
 	void
 	update();
@@ -59,6 +56,6 @@ public:
 	cleanup();
 
 private:
-	sf::RenderWindow* window;
+	Window * m_window;
 	sf::CircleShape* shape;
 };

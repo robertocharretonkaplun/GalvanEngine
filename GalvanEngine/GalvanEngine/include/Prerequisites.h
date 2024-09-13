@@ -10,6 +10,14 @@
 // Third Parties
 #include <SFML/Graphics.hpp>
 
+// Enums
+enum 
+ShapeType {
+  CIRCLE = 0,
+  RECTANGLE = 1,
+  TRIANGLE = 2
+};
+
 // MACRO for safe release of resources
 #define SAFE_PTR_RELEASE(x) if(x != nullptr) { delete x; x = nullptr; }
 
@@ -21,7 +29,7 @@
     std::cerr << os_.str();                                   \
 }
 
-#define ERROR(classObj, method, errorMSG, ptr)                         \
+#define ERROR(classObj, method, errorMSG)                         \
 {                                                                 \
     std::ostringstream os_;                                       \
     os_ << "ERROR : " << classObj << "::" << method << " : "      \

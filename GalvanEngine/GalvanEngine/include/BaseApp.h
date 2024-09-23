@@ -30,6 +30,7 @@
 #include "Prerequisites.h"
 #include "Window.h"
 #include "ShapeFactory.h"
+#include "Actor.h"
 
 class
 BaseApp {
@@ -59,6 +60,5 @@ public:
 private:
 	Window * m_window;
 	sf::CircleShape* shape;
-	ShapeFactory m_shapeFactory;
-	sf::Shape* Triangulo;
+	EngineUtilities::TSharedPointer<Actor> Triangle;
 };

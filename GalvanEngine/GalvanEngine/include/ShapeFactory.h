@@ -31,11 +31,23 @@ public:
   void 
   render(Window window) override {}
 
-  sf::Shape* getShape() {
+  void 
+  setPosition(float x, float y);
+
+  void 
+  setPosition(const sf::Vector2f& position);
+
+  void 
+  setFillColor(const sf::Color& color);
+
+  void 
+  Seek(const sf::Vector2f& targetPosition, float speed, float deltaTime, float range);
+
+  sf::Shape* 
+  getShape() {
     return m_shape;
   }
-public:
-	sf::Shape* m_shape;
 private:
+	sf::Shape* m_shape;
 	ShapeType m_shapeType;
 };

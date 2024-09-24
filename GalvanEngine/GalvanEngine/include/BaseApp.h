@@ -58,7 +58,10 @@ public:
 	cleanup();
 
 private:
+	sf::Clock clock;
+	sf::Time deltaTime;
+
 	Window * m_window;
-	sf::CircleShape* shape;
 	EngineUtilities::TSharedPointer<Actor> Triangle;
+	EngineUtilities::TSharedPointer<Actor> Circle;
 };

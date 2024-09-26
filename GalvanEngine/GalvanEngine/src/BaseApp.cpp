@@ -73,15 +73,17 @@ void
 BaseApp::update() {
 	// Mouse Position
 	sf::Vector2i mousePosition = sf::Mouse::getPosition(*m_window->getWindow());
-	sf::Vector2f mousePosF(static_cast<float>(mousePosition.x), 
-												 static_cast<float>(mousePosition.y));
+	sf::Vector2f mousePosF(static_cast<float>(mousePosition.x),
+		static_cast<float>(mousePosition.y));
 
 	if (!Circle.isNull()) {
-		Circle->getComponent<ShapeFactory>()->Seek(mousePosF, 
-																							 200.0f, 
-																							 deltaTime.asSeconds(), 
-																							 10.0f);
+		/*Circle->getComponent<ShapeFactory>()->Seek(mousePosF,
+																							 200.0f,
+																							 deltaTime.asSeconds(),
+																							 10.0f);*/
+		updateMovement(deltaTime.asSeconds(), Circle);
 	}
+
 }
 
 void
@@ -96,4 +98,27 @@ void
 BaseApp::cleanup() {
 	m_window->destroy();
 	delete m_window;
+}
+
+void
+BaseApp::updateMovement(float deltaTime, EngineUtilities::TSharedPointer<Actor> circle) {
+	// Verificar si el Circle es nulo
+	if (!circle || circle.isNull()) return;
+
+	// Posición actual del destino (punto de recorrido)
+	sf::Vector2f targetPos = waypoints[currentWaypoint];
+
+	// Llamar al Seek hacia el punto de recorrido actual
+	circle->getComponent<ShapeFactory>()->Seek(targetPos, 200.0f, deltaTime, 10.0f);
+
+	// Obtener la posición actual del actor
+	sf::Vector2f currentPos = circle->getComponent<ShapeFactory>()->getShape()->getPosition();
+
+	// Comprobar si el actor ha alcanzado el destino (o está cerca)
+	float distanceToTarget = std::sqrt(std::pow(targetPos.x - currentPos.x, 2) + std::pow(targetPos.y - currentPos.y, 2));
+
+	if (distanceToTarget < 10.0f) { // Umbral para considerar que ha llegado
+		// Pasar al siguiente waypoint
+		currentWaypoint = (currentWaypoint + 1) % waypoints.size(); // Ciclar a través de los puntos
+	}
 }

@@ -40,8 +40,14 @@ public:
   void 
   setFillColor(const sf::Color& color);
 
+  //void 
+  //Seek(const sf::Vector2f& targetPosition, float speed, float deltaTime, float range);
+
   void 
-  Seek(const sf::Vector2f& targetPosition, float speed, float deltaTime, float range);
+  setRotation(float angle);
+  
+  void 
+  setScale(const sf::Vector2f& scl);
 
   sf::Shape* 
   getShape() {

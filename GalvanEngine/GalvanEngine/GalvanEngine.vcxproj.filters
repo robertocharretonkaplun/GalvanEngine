@@ -74,5 +74,8 @@
     <ClInclude Include="include\Actor.h">
       <Filter>Header Files\ECS</Filter>
     </ClInclude>
+    <ClInclude Include="include\Transform.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -9,20 +9,22 @@ Window::Window(int width, int height, const std::string& title) {
 	else {
 		MESSAGE("Window", "Window", "OK");
 	}
+
+	// Initalize the ImGui Resource
+	ImGui::SFML::Init(*m_window); 
 }
 
 Window::~Window() {
+	ImGui::SFML::Shutdown();
 	delete m_window;
 }
 
 void
 Window::handleEvents() {
 	sf::Event event;
-	ImGui::SFML::Init(*m_window);  // Inicializa ImGui-SFML
-
 	while (m_window->pollEvent(event)) {
+		// Process Input Events into ImGui
 		ImGui::SFML::ProcessEvent(event);
-
 		if (event.type == sf::Event::Closed) {
 			m_window->close();
 		}
@@ -109,5 +111,6 @@ void Window::render()
 
 void
 Window::destroy() {
+	ImGui::SFML::Shutdown();
 	SAFE_PTR_RELEASE(m_window);
 }

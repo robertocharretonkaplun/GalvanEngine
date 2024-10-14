@@ -22,6 +22,9 @@
     <Filter Include="Header Files\Memory">
       <UniqueIdentifier>{a3902d38-ca10-4173-93c5-bf03789eef2c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\IMGUI">
+      <UniqueIdentifier>{3dd89e3e-b0d3-4801-8b13-dec24a4a6a39}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GalvanEngine.cpp">
@@ -38,6 +41,24 @@
     </ClCompile>
     <ClCompile Include="src\Actor.cpp">
       <Filter>Source Files\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ThirdParties\imgui-sfml-2.6.x\imgui.cpp">
+      <Filter>Header Files\IMGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ThirdParties\imgui-sfml-2.6.x\imgui_demo.cpp">
+      <Filter>Header Files\IMGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ThirdParties\imgui-sfml-2.6.x\imgui_draw.cpp">
+      <Filter>Header Files\IMGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ThirdParties\imgui-sfml-2.6.x\imgui_widgets.cpp">
+      <Filter>Header Files\IMGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ThirdParties\imgui-sfml-2.6.x\imgui-SFML.cpp">
+      <Filter>Header Files\IMGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\ThirdParties\imgui-sfml-2.6.x\imgui_tables.cpp">
+      <Filter>Header Files\IMGUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -76,6 +97,36 @@
     </ClInclude>
     <ClInclude Include="include\Transform.h">
       <Filter>Header Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParties\imgui-sfml-2.6.x\imconfig-SFML.h">
+      <Filter>Header Files\IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParties\imgui-sfml-2.6.x\imgui-SFML.h">
+      <Filter>Header Files\IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParties\imgui-sfml-2.6.x\imgui-SFML_export.h">
+      <Filter>Header Files\IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParties\imgui-sfml-2.6.x\imgui.h">
+      <Filter>Header Files\IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParties\imgui-sfml-2.6.x\imconfig.h">
+      <Filter>Header Files\IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParties\imgui-sfml-2.6.x\imgui_impl_opengl3_loader.h">
+      <Filter>Header Files\IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParties\imgui-sfml-2.6.x\imgui_internal.h">
+      <Filter>Header Files\IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParties\imgui-sfml-2.6.x\imstb_rectpack.h">
+      <Filter>Header Files\IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParties\imgui-sfml-2.6.x\imstb_textedit.h">
+      <Filter>Header Files\IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ThirdParties\imgui-sfml-2.6.x\imstb_truetype.h">
+      <Filter>Header Files\IMGUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

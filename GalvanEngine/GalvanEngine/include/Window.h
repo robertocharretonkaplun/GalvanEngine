@@ -64,4 +64,7 @@ public:
 
 private:
 	sf::RenderWindow* m_window;
+public:
+	sf::Time deltaTime;
+	sf::Clock clock;
 };

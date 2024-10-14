@@ -35,7 +35,7 @@ BaseApp::run() {
 	}
 	while (m_window->isOpen()) {
 		m_window->handleEvents();
-		deltaTime = clock.restart();
+		//deltaTime = clock.restart();
 		update();
 		render();
 	}
@@ -78,21 +78,18 @@ BaseApp::initialize() {
 
 void
 BaseApp::update() {
+	m_window->update();
 	// Mouse Position
 	sf::Vector2i mousePosition = sf::Mouse::getPosition(*m_window->getWindow());
 	sf::Vector2f mousePosF(static_cast<float>(mousePosition.x),
 		static_cast<float>(mousePosition.y));
 
 	if (!Triangle.isNull()) {
-		Triangle->update(deltaTime.asSeconds());
+		Triangle->update(m_window->deltaTime.asSeconds());
 	}
 	if (!Circle.isNull()) {
-		Circle->update(deltaTime.asSeconds());
-		/*Circle->getComponent<ShapeFactory>()->Seek(mousePosF,
-																							 200.0f,
-																							 deltaTime.asSeconds(),
-																							 10.0f);*/
-		updateMovement(deltaTime.asSeconds(), Circle);
+		Circle->update(m_window->deltaTime.asSeconds());
+		updateMovement(m_window->deltaTime.asSeconds(), Circle);
 	}
 
 }
@@ -100,9 +97,19 @@ BaseApp::update() {
 void
 BaseApp::render() {
 	m_window->clear();
-	Circle->render(*m_window);
-	Triangle->render(*m_window);
+	if (!Circle.isNull()) {
+		Circle->render(*m_window);
+	}
+	if (!Triangle.isNull()) {
+		Triangle->render(*m_window);
+	}
+
+	ImGui::Begin("Hello, world!");
+	ImGui::Text("This is a simple example.");
+	ImGui::End();
+	m_window->render();
 	m_window->display();
+
 }
 
 void

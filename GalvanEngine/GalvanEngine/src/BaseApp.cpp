@@ -50,12 +50,29 @@ BaseApp::initialize() {
 		ERROR("BaseApp", "initialize", "Error on window creation, var is null");
 		return false;
 	}
+	// Track Actor
+	Track = EngineUtilities::MakeShared<Actor>("Track");
+	if (!Track.isNull()) {
+		Track->getComponent<ShapeFactory>()->createShape(ShapeType::RECTANGLE);
+		//Circle->getComponent<ShapeFactory>()->setFillColor(sf::Color::Blue);
+
+		// Establecer posición, rotación y escala desde Transform
+		Track->getComponent<Transform>()->setPosition(sf::Vector2f(0.0f, 0.0f));
+		Track->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
+		Track->getComponent<Transform>()->setScale(sf::Vector2f(11.0f, 12.0f));
+
+		if (!texture.loadFromFile("Circuit.png")) {
+			std::cout << "Error de carga de textura" << std::endl;
+			return -1; // Manejar error de carga
+		}
+		Track->getComponent<ShapeFactory>()->getShape()->setTexture(&texture);
+	}
 
 	// Triangle Actor
 	Circle = EngineUtilities::MakeShared<Actor>("Circle");
 	if (!Circle.isNull()) {
 		Circle->getComponent<ShapeFactory>()->createShape(ShapeType::CIRCLE);
-		Circle->getComponent<ShapeFactory>()->setFillColor(sf::Color::Blue);
+		//Circle->getComponent<ShapeFactory>()->setFillColor(sf::Color::Blue);
 
 		// Establecer posición, rotación y escala desde Transform
 		Circle->getComponent<Transform>()->setPosition(sf::Vector2f(200.0f, 200.0f));
@@ -85,6 +102,9 @@ BaseApp::update() {
 	sf::Vector2f mousePosF(static_cast<float>(mousePosition.x),
 		static_cast<float>(mousePosition.y));
 
+	if (!Track.isNull()) {
+		Track->update(m_window->deltaTime.asSeconds());
+	}
 	if (!Triangle.isNull()) {
 		Triangle->update(m_window->deltaTime.asSeconds());
 	}
@@ -97,6 +117,9 @@ BaseApp::update() {
 void
 BaseApp::render() {
 	m_window->clear();
+	if (!Track.isNull()) {
+		Track->render(*m_window);
+	}
 	if (!Circle.isNull()) {
 		Circle->render(*m_window);
 	}

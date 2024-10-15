@@ -4,14 +4,14 @@ Window::Window(int width, int height, const std::string& title) {
 	m_window = new sf::RenderWindow(sf::VideoMode(width, height), title);
 
 	if (!m_window) {
-		ERROR("Window", "Window", "CHECK CONSTRUCTOR" );
+		ERROR("Window", "Window", "CHECK CONSTRUCTOR");
 	}
 	else {
 		MESSAGE("Window", "Window", "OK");
 	}
 
 	// Initalize the ImGui Resource
-	ImGui::SFML::Init(*m_window); 
+	ImGui::SFML::Init(*m_window);
 }
 
 Window::~Window() {
@@ -25,22 +25,21 @@ Window::handleEvents() {
 	while (m_window->pollEvent(event)) {
 		// Process Input Events into ImGui
 		ImGui::SFML::ProcessEvent(event);
-		if (event.type == sf::Event::Closed) {
+		switch (event.type) {
+		case sf::Event::Closed:
 			m_window->close();
-		}
-		// Manejar el evento de redimensionar
-		if (event.type == sf::Event::Resized) {
+			break;
+		case sf::Event::Resized:
 			// Obtener el nuevo tamaño de la ventana
-			unsigned int newWidth = event.size.width;
-			unsigned int newHeight = event.size.height;
+			unsigned int width = event.size.width;
+			unsigned int height = event.size.height;
 
-			// Opcional: Redefinir el tamaño de la vista para ajustarse al nuevo tamaño de la ventana
-			sf::View view = m_window->getView();
-			view.setSize(static_cast<float>(newWidth), static_cast<float>(newHeight));
-			m_window->setView(view);
+			m_view = m_window->getView();
+			m_view.setSize(static_cast<float>(width), static_cast<float>(height));
+			m_window->setView(m_view);
+			break;
 		}
 	}
-	
 }
 
 void
@@ -49,7 +48,7 @@ Window::clear() {
 		m_window->clear();
 	}
 	else {
-		ERROR("Window", "clear", "CHECK FOR WINDOW POINTER DATA" );
+		ERROR("Window", "clear", "CHECK FOR WINDOW POINTER DATA");
 	}
 }
 
@@ -59,7 +58,7 @@ Window::display() {
 		m_window->display();
 	}
 	else {
-		ERROR("Window", "display", "CHECK FOR WINDOW POINTER DATA" );
+		ERROR("Window", "display", "CHECK FOR WINDOW POINTER DATA");
 	}
 }
 
@@ -69,7 +68,7 @@ Window::isOpen() const {
 		return m_window->isOpen();
 	}
 	else {
-		ERROR("Window", "isOpen", "CHECK FOR WINDOW POINTER DATA" );
+		ERROR("Window", "isOpen", "CHECK FOR WINDOW POINTER DATA");
 		return false;
 	}
 }
@@ -80,7 +79,7 @@ Window::draw(const sf::Drawable& drawable) {
 		m_window->draw(drawable);
 	}
 	else {
-		ERROR("Window", "draw", "CHECK FOR WINDOW POINTER DATA" );
+		ERROR("Window", "draw", "CHECK FOR WINDOW POINTER DATA");
 	}
 }
 
@@ -90,12 +89,12 @@ Window::getWindow() {
 		return m_window;
 	}
 	else {
-		ERROR("Window", "getWindow", "CHECK FOR WINDOW POINTER DATA" );
+		ERROR("Window", "getWindow", "CHECK FOR WINDOW POINTER DATA");
 		return nullptr;
 	}
 }
 
-void 
+void
 Window::update() {
 	// Almacena el deltaTime una sola vez
 	deltaTime = clock.restart();

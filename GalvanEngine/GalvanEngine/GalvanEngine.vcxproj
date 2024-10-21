@@ -192,6 +192,7 @@
     <ClInclude Include="include\Memory\TWeakPointer.h" />
     <ClInclude Include="include\Prerequisites.h" />
     <ClInclude Include="include\ShapeFactory.h" />
+    <ClInclude Include="include\Texture.h" />
     <ClInclude Include="include\Transform.h" />
     <ClInclude Include="include\Window.h" />
   </ItemGroup>

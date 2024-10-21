@@ -14,6 +14,7 @@ ComponentType {
 	PHYSICS = 4,
 	AUDIOSOURCE = 5,
 	SHAPE = 6,
+	TEXTURE = 7
 };
 
 /**

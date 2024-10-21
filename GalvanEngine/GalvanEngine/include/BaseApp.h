@@ -59,9 +59,8 @@ public:
 
 	void 
 	updateMovement(float deltaTime, EngineUtilities::TSharedPointer<Actor> circle);
-private:
-	
 
+private:
 	Window * m_window;
 	EngineUtilities::TSharedPointer<Actor> Triangle;
 	EngineUtilities::TSharedPointer<Actor> Circle;
@@ -82,5 +81,6 @@ private:
 		{720.0f, 450.0f}
 	};
 
+	sf::Texture Luigi;
 	sf::Texture texture;
 };

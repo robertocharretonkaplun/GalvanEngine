@@ -54,7 +54,6 @@ BaseApp::initialize() {
 	Track = EngineUtilities::MakeShared<Actor>("Track");
 	if (!Track.isNull()) {
 		Track->getComponent<ShapeFactory>()->createShape(ShapeType::RECTANGLE);
-		//Circle->getComponent<ShapeFactory>()->setFillColor(sf::Color::Blue);
 
 		// Establecer posición, rotación y escala desde Transform
 		Track->getComponent<Transform>()->setPosition(sf::Vector2f(0.0f, 0.0f));
@@ -72,12 +71,17 @@ BaseApp::initialize() {
 	Circle = EngineUtilities::MakeShared<Actor>("Circle");
 	if (!Circle.isNull()) {
 		Circle->getComponent<ShapeFactory>()->createShape(ShapeType::CIRCLE);
-		//Circle->getComponent<ShapeFactory>()->setFillColor(sf::Color::Blue);
 
 		// Establecer posición, rotación y escala desde Transform
 		Circle->getComponent<Transform>()->setPosition(sf::Vector2f(200.0f, 200.0f));
 		Circle->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
 		Circle->getComponent<Transform>()->setScale(sf::Vector2f(1.0f, 1.0f));
+
+		if (!Luigi.loadFromFile("Characters/tile000.png")) {
+			std::cout << "Error de carga de textura" << std::endl;
+			return -1; // Manejar error de carga
+		}
+		Circle->getComponent<ShapeFactory>()->getShape()->setTexture(&Luigi);
 	}
 
 	// Triangle Actor

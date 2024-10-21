@@ -128,5 +128,8 @@
     <ClInclude Include="..\..\ThirdParties\imgui-sfml-2.6.x\imstb_truetype.h">
       <Filter>IMGUI</Filter>
     </ClInclude>
+    <ClInclude Include="include\Texture.h">
+      <Filter>Header Files\ECS</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

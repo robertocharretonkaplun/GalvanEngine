@@ -33,6 +33,8 @@ BaseApp::run() {
 	if (!initialize()) {
 		ERROR("BaseApp", "run", "Initializes result on a false statemente, check method validations");
 	}
+	m_GUI.init();
+
 	while (m_window->isOpen()) {
 		m_window->handleEvents();
 		update();
@@ -45,7 +47,7 @@ BaseApp::run() {
 
 bool
 BaseApp::initialize() {
-	m_window = new Window(800, 600, "Galvan Engine");
+	m_window = new Window(1920, 1080, "Galvan Engine");
 	if (!m_window) {
 		ERROR("BaseApp", "initialize", "Error on window creation, var is null");
 		return false;
@@ -131,9 +133,9 @@ BaseApp::render() {
 		Triangle->render(*m_window);
 	}
 
-	ImGui::Begin("Hello, world!");
-	ImGui::Text("This is a simple example.");
-	ImGui::End();
+	// Mostrar el render en ImGui
+	m_window->renderToTexture();  // Finaliza el render a la textura
+	m_window->showInImGui();      // Muestra la textura en ImGui
 
 	m_window->render();
 	m_window->display();

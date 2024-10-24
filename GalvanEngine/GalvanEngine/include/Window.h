@@ -47,6 +47,12 @@ public:
 	sf::RenderWindow* 
 	getWindow();
 
+	void 
+	renderToTexture();
+
+	void 
+	showInImGui();
+
 	// Funcion de inicializacion
 	void
 	init();
@@ -66,6 +72,7 @@ private:
 	sf::RenderWindow* m_window;
 	sf::View m_view;
 public:
+	sf::RenderTexture m_renderTexture;
 	sf::Time deltaTime;
 	sf::Clock clock;
 };

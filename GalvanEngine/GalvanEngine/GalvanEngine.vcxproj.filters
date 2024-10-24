@@ -60,6 +60,9 @@
     <ClCompile Include="..\..\ThirdParties\imgui-sfml-2.6.x\imgui_tables.cpp">
       <Filter>IMGUI</Filter>
     </ClCompile>
+    <ClCompile Include="src\GUI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\BaseApp.h">
@@ -130,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="include\Texture.h">
       <Filter>Header Files\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GUI.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

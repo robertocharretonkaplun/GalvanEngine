@@ -31,6 +31,7 @@
 #include "Window.h"
 #include "ShapeFactory.h"
 #include "Actor.h"
+#include "GUI.h"
 
 class
 BaseApp {
@@ -83,4 +84,6 @@ private:
 
 	sf::Texture Luigi;
 	sf::Texture texture;
+
+	GUI m_GUI;
 };

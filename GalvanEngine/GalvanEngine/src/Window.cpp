@@ -4,6 +4,8 @@ Window::Window(int width, int height, const std::string& title) {
 	m_window = new sf::RenderWindow(sf::VideoMode(width, height), title);
 	if (!m_window) {
 		ERROR("Window", "Window", "CHECK CONSTRUCTOR");
+		// NotificationService.instace.Notify(ConsolErrorType::ERROR,
+		//	"Error initializing the window class, check for constructor");
 	}
 	else {
 		MESSAGE("Window", "Window", "OK");

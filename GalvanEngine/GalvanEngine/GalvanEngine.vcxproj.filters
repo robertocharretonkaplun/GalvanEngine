@@ -25,6 +25,9 @@
     <Filter Include="IMGUI">
       <UniqueIdentifier>{3dd89e3e-b0d3-4801-8b13-dec24a4a6a39}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Services">
+      <UniqueIdentifier>{17c4be61-a5ca-4a31-98af-b8cf03fb9120}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\GalvanEngine.cpp">
@@ -136,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="include\GUI.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Services\NotificationService.h">
+      <Filter>Header Files\Services</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

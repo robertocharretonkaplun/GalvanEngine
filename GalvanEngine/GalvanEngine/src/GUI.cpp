@@ -55,3 +55,15 @@ GUI::setupGUIStyle() {
 	style.WindowBorderSize = 1.0f;   // Grosor del borde de ventanas
 	style.PopupBorderSize = 1.0f;   // Grosor del borde de popups
 }
+
+void 
+GUI::console(std::map<ConsolErrorType, std::string> programMessages) {
+	ImGui::Begin("Console");
+	for (const auto& pair : programMessages) {
+		ImGui::Text("Code: %d - Message: %s", pair.first, pair.second.c_str());
+	}
+	ImGui::End();
+
+}
+
+

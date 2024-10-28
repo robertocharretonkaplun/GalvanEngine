@@ -27,11 +27,25 @@
  * SOFTWARE.
 */
 #include "BaseApp.h"
+#include "Services\NotificationService.h"
+
+BaseApp::~BaseApp()
+{
+	NotificationService& notifier = NotificationService::getInstance();
+	notifier.saveMessagesToFile("LogData.txt");
+}
 
 int
 BaseApp::run() {
+	NotificationService& notifier = NotificationService::getInstance();
+
 	if (!initialize()) {
+		notifier.addMessage(ConsolErrorType::ERROR, "Initializes result on a false statemente, check method validations");
+		notifier.saveMessagesToFile("LogData.txt");
 		ERROR("BaseApp", "run", "Initializes result on a false statemente, check method validations");
+	}
+	else {
+		notifier.addMessage(ConsolErrorType::NORMAL, "All programs were initialized correctly");
 	}
 	m_GUI.init();
 
@@ -122,6 +136,8 @@ BaseApp::update() {
 
 void
 BaseApp::render() {
+	NotificationService& notifier = NotificationService::getInstance();
+
 	m_window->clear();
 	if (!Track.isNull()) {
 		Track->render(*m_window);
@@ -136,7 +152,7 @@ BaseApp::render() {
 	// Mostrar el render en ImGui
 	m_window->renderToTexture();  // Finaliza el render a la textura
 	m_window->showInImGui();      // Muestra la textura en ImGui
-
+	m_GUI.console(notifier.getNotifications());
 	m_window->render();
 	m_window->display();
 

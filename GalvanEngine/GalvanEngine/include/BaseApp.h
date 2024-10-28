@@ -32,12 +32,11 @@
 #include "ShapeFactory.h"
 #include "Actor.h"
 #include "GUI.h"
-
 class
 BaseApp {
 public:
 	BaseApp() = default;
-	~BaseApp() = default;
+	~BaseApp();
 
 	// Funcion encargada de ejecutar la aplicacion en main
 	int

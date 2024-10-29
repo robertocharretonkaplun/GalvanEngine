@@ -31,7 +31,7 @@ ShapeType {
 
 enum 
 ConsolErrorType {
-  NORMAL = 0,
+  INFO = 0,
   WARNING = 1,
   ERROR = 2
 };

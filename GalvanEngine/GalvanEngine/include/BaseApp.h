@@ -66,6 +66,8 @@ private:
 	EngineUtilities::TSharedPointer<Actor> Circle;
 	EngineUtilities::TSharedPointer<Actor> Track;
 
+	std::vector< EngineUtilities::TSharedPointer<Actor>> m_actors;
+
 	// Seek Activity
 	int currentWaypoint = 0;
 

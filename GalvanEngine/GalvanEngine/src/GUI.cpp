@@ -56,14 +56,49 @@ GUI::setupGUIStyle() {
 	style.PopupBorderSize = 1.0f;   // Grosor del borde de popups
 }
 
-void 
-GUI::console(std::map<ConsolErrorType, std::string> programMessages) {
+void
+GUI::console(const std::map<ConsolErrorType, std::vector<std::string>>& programMessages) {
 	ImGui::Begin("Console");
-	for (const auto& pair : programMessages) {
-		ImGui::Text("Code: %d - Message: %s", pair.first, pair.second.c_str());
-	}
-	ImGui::End();
 
+	static ImGuiTextFilter filter; // Filtro de búsqueda
+	filter.Draw("Filter (\"error\", \"warning\", etc.)", 180.0f);
+
+	ImGui::Separator();
+
+	ImGui::BeginChild("ScrollingRegion", ImVec2(0, 0), false, ImGuiWindowFlags_HorizontalScrollbar);
+
+	for (const auto& pair : programMessages) {
+		// Establece color según el tipo de mensaje
+		ImVec4 color;
+		switch (pair.first) {
+		case ConsolErrorType::ERROR:
+			color = ImVec4(1.0f, 0.4f, 0.4f, 1.0f); // Rojo para errores
+			break;
+		case ConsolErrorType::WARNING:
+			color = ImVec4(1.0f, 1.0f, 0.4f, 1.0f); // Amarillo para advertencias
+			break;
+		case ConsolErrorType::INFO:
+		default:
+			color = ImVec4(0.8f, 0.8f, 0.8f, 1.0f); // Gris para mensajes de información
+			break;
+		}
+
+		for (const auto& message : pair.second) {
+			if (!filter.PassFilter(message.c_str())) continue; // Filtrar mensajes según el filtro de búsqueda
+
+			ImGui::PushStyleColor(ImGuiCol_Text, color);
+			ImGui::Text("[%d] %s", pair.first, message.c_str());
+			ImGui::PopStyleColor();
+		}
+	}
+
+	// Desplazamiento automático al final
+	if (ImGui::GetScrollY() >= ImGui::GetScrollMaxY())
+		ImGui::SetScrollHereY(1.0f);
+
+	ImGui::EndChild();
+	ImGui::End();
 }
+
 
 

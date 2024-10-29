@@ -25,7 +25,7 @@ public:
 	setupGUIStyle();
 
 	void 
-	console(std::map<ConsolErrorType, std::string> programMessages);
+	console(const std::map<ConsolErrorType, std::vector<std::string>>& programMessages);
 
 private:
 };

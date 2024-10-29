@@ -45,7 +45,7 @@ BaseApp::run() {
 		ERROR("BaseApp", "run", "Initializes result on a false statemente, check method validations");
 	}
 	else {
-		notifier.addMessage(ConsolErrorType::NORMAL, "All programs were initialized correctly");
+		notifier.addMessage(ConsolErrorType::INFO, "All programs were initialized correctly");
 	}
 	m_GUI.init();
 
@@ -61,6 +61,7 @@ BaseApp::run() {
 
 bool
 BaseApp::initialize() {
+	NotificationService& notifier = NotificationService::getInstance();
 	m_window = new Window(1920, 1080, "Galvan Engine");
 	if (!m_window) {
 		ERROR("BaseApp", "initialize", "Error on window creation, var is null");
@@ -82,7 +83,7 @@ BaseApp::initialize() {
 		}
 		Track->getComponent<ShapeFactory>()->getShape()->setTexture(&texture);
 	}
-
+	m_actors.push_back(Track);
 	// Triangle Actor
 	Circle = EngineUtilities::MakeShared<Actor>("Circle");
 	if (!Circle.isNull()) {
@@ -99,6 +100,7 @@ BaseApp::initialize() {
 		}
 		Circle->getComponent<ShapeFactory>()->getShape()->setTexture(&Luigi);
 	}
+	m_actors.push_back(Circle);
 
 	// Triangle Actor
 	Triangle = EngineUtilities::MakeShared<Actor>("Triangle");
@@ -108,6 +110,8 @@ BaseApp::initialize() {
 		Triangle->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
 		Triangle->getComponent<Transform>()->setScale(sf::Vector2f(1.0f, 1.0f));
 	}
+
+	m_actors.push_back(Triangle);
 
 	return true;
 }
@@ -122,15 +126,14 @@ BaseApp::update() {
 	sf::Vector2f mousePosF(static_cast<float>(mousePosition.x),
 		static_cast<float>(mousePosition.y));
 
-	if (!Track.isNull()) {
-		Track->update(m_window->deltaTime.asSeconds());
-	}
-	if (!Triangle.isNull()) {
-		Triangle->update(m_window->deltaTime.asSeconds());
-	}
-	if (!Circle.isNull()) {
-		Circle->update(m_window->deltaTime.asSeconds());
-		updateMovement(m_window->deltaTime.asSeconds(), Circle);
+	// Update the actors
+	for (auto& actor : m_actors) {
+		if (!actor.isNull()) {
+			actor->update(m_window->deltaTime.asSeconds());
+			if (actor->getName() == "Circle") {
+				updateMovement(m_window->deltaTime.asSeconds(), actor);
+			}
+		}
 	}
 }
 
@@ -139,14 +142,12 @@ BaseApp::render() {
 	NotificationService& notifier = NotificationService::getInstance();
 
 	m_window->clear();
-	if (!Track.isNull()) {
-		Track->render(*m_window);
-	}
-	if (!Circle.isNull()) {
-		Circle->render(*m_window);
-	}
-	if (!Triangle.isNull()) {
-		Triangle->render(*m_window);
+
+	// Update the actors
+	for (auto& actor : m_actors) {
+		if (!actor.isNull()) {
+			actor->render(*m_window);
+		}
 	}
 
 	// Mostrar el render en ImGui

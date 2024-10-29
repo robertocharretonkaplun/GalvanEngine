@@ -1,6 +1,9 @@
 #include "Actor.h"
+#include "Services\NotificationService.h"
 
 Actor::Actor(std::string actorName) {
+	NotificationService& notifier = NotificationService::getInstance();
+
 	// Setup Actor Name
 	m_name = actorName;
 
@@ -14,6 +17,8 @@ Actor::Actor(std::string actorName) {
 
 	// Setup Sprite
 
+	// Notify that the actor was created correctly
+	notifier.Log("Actor named " + m_name + " was created.");
 }
 
 void 

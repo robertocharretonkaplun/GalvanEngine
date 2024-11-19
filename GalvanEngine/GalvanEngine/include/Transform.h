@@ -65,6 +65,7 @@ public:
     return position;
   }
   
+  
   sf::Vector2f&
   getRotation() {
     return rotation;
@@ -73,6 +74,21 @@ public:
   sf::Vector2f& 
   getScale() {
     return scale;
+  }
+
+  float* 
+  getPosData() {
+    return &position.x;
+  }
+  
+  float* 
+  getRotData() {
+    return &rotation.x;
+  }
+  
+  float* 
+  getScaData() {
+    return &scale.x;
   }
 private:
   sf::Vector2f position;  // Posición del objeto

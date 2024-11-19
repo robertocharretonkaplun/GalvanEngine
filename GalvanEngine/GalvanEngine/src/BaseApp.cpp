@@ -28,6 +28,7 @@
 */
 #include "BaseApp.h"
 #include "Services\NotificationService.h"
+#include "Services\ResourceManager.h"
 
 BaseApp::~BaseApp()
 {
@@ -77,13 +78,23 @@ BaseApp::initialize() {
 		Track->getComponent<Transform>()->setRotation(sf::Vector2f(0.0f, 0.0f));
 		Track->getComponent<Transform>()->setScale(sf::Vector2f(11.0f, 12.0f));
 
-		if (!texture.loadFromFile("Circuit.png")) {
-			std::cout << "Error de carga de textura" << std::endl;
-			return -1; // Manejar error de carga
+		// Obtener el Resource Manager
+		ResourceManager& resourceMan = ResourceManager::getInstance();
+
+		// Cargar la textura para el actor Track
+		if (!resourceMan.loadTexture("Track", "png")) {
+			notifier.addMessage(ConsolErrorType::ERROR, "Cant load texture");
 		}
-		Track->getComponent<ShapeFactory>()->getShape()->setTexture(&texture);
+
+		// Obtenemos la textura Carga
+		EngineUtilities::TSharedPointer<Texture> trackTexture = resourceMan.getTexture("Track");
+		if (trackTexture) {
+			Track->getComponent<ShapeFactory>()->getShape()->setTexture(&trackTexture->getTexture());
+		}
+
+		// Almacenamos el actor
+		m_actors.push_back(Track);
 	}
-	m_actors.push_back(Track);
 	// Triangle Actor
 	Circle = EngineUtilities::MakeShared<Actor>("Circle");
 	if (!Circle.isNull()) {
@@ -143,7 +154,7 @@ BaseApp::render() {
 
 	m_window->clear();
 
-	// Update the actors
+	// Render the actors
 	for (auto& actor : m_actors) {
 		if (!actor.isNull()) {
 			actor->render(*m_window);
@@ -153,10 +164,12 @@ BaseApp::render() {
 	// Mostrar el render en ImGui
 	m_window->renderToTexture();  // Finaliza el render a la textura
 	m_window->showInImGui();      // Muestra la textura en ImGui
+	m_GUI.barMenu();
+	m_GUI.Outliner(m_actors);
 	m_GUI.console(notifier.getNotifications());
+	m_GUI.inspector(m_actors);
 	m_window->render();
 	m_window->display();
-
 }
 
 void

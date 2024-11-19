@@ -11,14 +11,7 @@ public:
 																														m_extension(extension), 
 																														Component(ComponentType::TEXTURE) {
 		if (!m_texture.loadFromFile(m_textureName + "." + m_extension)) {
-			std::cout << "Error de carga de textura" << std::endl;
-		}
-		else {
-			m_textureName = "Default";
-			m_extension = "png";
-			if (!m_texture.loadFromFile(m_textureName + "." + m_extension)) {
-				std::cout << "Error de carga de textura" << std::endl;
-			}
+			std::cout << "Error de carga de textura: " << m_textureName << "." << m_extension << std::endl;
 		}
 	}
 
@@ -27,6 +20,15 @@ public:
 
 	sf::Texture& getTexture() {
 		return m_texture;
+	}
+
+	// Implementación de los métodos virtuales puros
+	void update(float deltaTime) override {
+		// Lógica de actualización de la textura (si es necesario)
+	}
+
+	void render(Window window) override {
+		// Lógica de renderizado de la textura (si es necesario)
 	}
 private:
 	std::string m_textureName;
